@@ -6,6 +6,8 @@ const offset = {
     xMax: parseValueAndUnit('40px'),
     yMin: parseValueAndUnit('-80%'),
     yMax: parseValueAndUnit('50%'),
+    rMin: parseValueAndUnit(-30, 'deg'),
+    rMax: parseValueAndUnit(30, 'deg'),
 };
 
 const percentMoved = 44;
@@ -32,6 +34,16 @@ test('Gets offsets based on percent in view', () => {
             ),
             unit: offset.yMax.unit,
         },
+        rotate: {
+            value: scaleBetween(
+                percentMoved,
+                offset.rMax.value,
+                offset.rMin.value,
+                0,
+                100
+            ),
+            unit: offset.rMax.unit,
+        }
     });
 
     expect(getParallaxOffsets(offset, percentMoved, true)).toEqual({
@@ -55,5 +67,15 @@ test('Gets offsets based on percent in view', () => {
             ),
             unit: offset.yMax.unit,
         },
+        rotate: {
+            value: scaleBetween(
+                percentMoved,
+                offset.rMin.value,
+                offset.rMax.value,
+                0,
+                100
+            ),
+            unit: offset.rMax.unit,
+        }
     });
 });
