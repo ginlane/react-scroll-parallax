@@ -245,12 +245,16 @@ function ParallaxController() {
             offsetYMax,
             offsetXMax,
             offsetXMin,
+            rotateMin,
+            rotateMax,
         } = element.props;
 
         const yMin = parseValueAndUnit(offsetYMin);
         const yMax = parseValueAndUnit(offsetYMax);
         const xMin = parseValueAndUnit(offsetXMax);
         const xMax = parseValueAndUnit(offsetXMin);
+        const rMin = parseValueAndUnit(rotateMin, 'deg');
+        const rMax = parseValueAndUnit(rotateMax, 'deg');
 
         if (xMin.unit !== xMax.unit || yMin.unit !== yMax.unit) {
             throw new Error(
@@ -268,6 +272,8 @@ function ParallaxController() {
             yMax,
             xMin,
             xMax,
+            rMin,
+            rMax,
         };
     }
 
@@ -295,8 +301,9 @@ function ParallaxController() {
 
         // Apply styles
         const el = element.elInner;
+
         el.style.cssText = `position:relative;
-            transform:translate3d(${offsets.x.value}${offsets.x.unit}, ${offsets.y.value}${offsets.y.unit}, 0)`;
+            transform:translate3d(${offsets.x.value}${offsets.x.unit}, ${offsets.y.value}${offsets.y.unit}, 0) rotate(${offsets.rotate.value}${offsets.rotate.unit})`;
     }
 
     /**

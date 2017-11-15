@@ -10,6 +10,8 @@ export default class Parallax extends Component {
         offsetYMin: 0,
         offsetXMax: 0,
         offsetXMin: 0,
+        rotateMin: 0,
+        rotateMax: 0,
         slowerScrollRate: false, // determines whether scroll rate is faster or slower than standard scroll
         tag: 'div',
     };
@@ -22,6 +24,8 @@ export default class Parallax extends Component {
         offsetXMin: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         offsetYMax: offsetMax,
         offsetYMin: offsetMin,
+        rotateMin: PropTypes.number,
+        rotateMax: PropTypes.number,
         slowerScrollRate: PropTypes.bool.isRequired,
         tag: PropTypes.string.isRequired,
     };
@@ -59,6 +63,8 @@ export default class Parallax extends Component {
                 offsetXMin: this.props.offsetXMin,
                 offsetYMax: this.props.offsetYMax,
                 offsetYMin: this.props.offsetYMin,
+                rotateMin: this.props.rotateMin,
+                rotateMax: this.props.rotateMax,
                 slowerScrollRate: this.props.slowerScrollRate,
             },
         });
@@ -74,6 +80,8 @@ export default class Parallax extends Component {
                     offsetXMin: nextProps.offsetXMin,
                     offsetYMax: nextProps.offsetYMax,
                     offsetYMin: nextProps.offsetYMin,
+                    rotateMin: nextProps.rotateMin,
+                    rotateMax: nextProps.rotateMax,
                     slowerScrollRate: nextProps.slowerScrollRate,
                 },
             });
