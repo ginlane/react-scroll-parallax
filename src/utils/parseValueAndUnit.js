@@ -4,7 +4,7 @@
  * @param {string} value
  * @return {object} The parsed value and the unit if any
  */
-export default function parseValueAndUnit(value) {
+export default function parseValueAndUnit(value, defaultUnit = '%') {
     const isBool = typeof value === 'boolean';
     const isObject = typeof value === 'object';
     const isString = typeof value === 'string';
@@ -12,14 +12,14 @@ export default function parseValueAndUnit(value) {
 
     if (isBool || isObject) {
         throw new Error(
-            'Ivalid value provided. Must provide a value as a string with % or px units.'
+            'Invalid value provided. Must provide a value as a string with % or px units.'
         );
     }
 
     if (isNumb) {
         return {
             value,
-            unit: '%', // defaults to percent if not unit is passed
+            unit: defaultUnit, // defaults to percent if not unit is passed
         };
     } else if (isString && value.slice(-1) === '%') {
         // remove % then parse

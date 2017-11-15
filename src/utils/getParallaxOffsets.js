@@ -12,22 +12,26 @@ export default function getParallaxOffsets(
     percentMoved,
     slowerScrollRate
 ) {
-    const { yMin, yMax, xMin, xMax } = offsets;
+    const { yMin, yMax, xMin, xMax, rMin, rMax } = offsets;
 
     const yUnit = yMax.unit;
     const xUnit = xMax.unit;
+    const rotateUnit = rMax.unit;
 
     // sets parallax to faster or slower than the rate of scroll
     let x = 0;
     let y = 0;
+    let rotate = 0;
 
     if (slowerScrollRate) {
         x = scaleBetween(percentMoved, xMin.value, xMax.value, 0, 100);
         y = scaleBetween(percentMoved, yMin.value, yMax.value, 0, 100);
+        rotate = scaleBetween(percentMoved, rMin.value, rMax.value, 0, 100);
     } else {
         // flipped max/min
         x = scaleBetween(percentMoved, xMax.value, xMin.value, 0, 100);
         y = scaleBetween(percentMoved, yMax.value, yMin.value, 0, 100);
+        rotate = scaleBetween(percentMoved, rMax.value, rMin.value, 0, 100);
     }
 
     return {
@@ -39,5 +43,9 @@ export default function getParallaxOffsets(
             value: y,
             unit: yUnit,
         },
+        rotate: {
+            value: rotate,
+            unit: rotateUnit,
+        }
     };
 }
